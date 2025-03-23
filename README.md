@@ -27,7 +27,7 @@ What's the story behind this? Well, there actually is one.
 
 One early Sunday morning, I woke up and jumped on the computer because I wanted to play around with some coding. I usually do this in the dark, with all the windows and doors closed shut and music pumping through my headphones. As you can see, I get very distracted.
 
-About two hours in, I remembered I had to wash my laundry and hang the clothes out to dry in the sun in my backyard. Great! I got the laundry basket, detergent, fabric softener, and everything ready. Just as I was about to walk out the door of the building, I realized it had been raining hard.
+About two hours in, I remembered I had to wash my laundry and hang the clothes out to dry in the sun in my backyard. Great! I got the laundry basket, detergent, fabric softener, and everything ready. Just as I was about to walk out the building door, I realized it had been raining hard.
 
 How could I have missed this simple feature of nature? 
 
@@ -52,7 +52,7 @@ I hope you find it as useful as I do.
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/your-username/forecast-cli.git
+   git clone https://github.com/barbaracalderon/forecast-cli.git
    cd forecast-cli
    ```
 2. **Set up the Configuration**:
@@ -67,14 +67,14 @@ mkdir -p ~/.config/forecast-cli
 mv /path/to/forecast-cli/.env ~/.config/forecast-cli/
 ```
 
-3. **Edit the `.env` File:
+3. **Edit the `.env` File**:
 
 - Open the `.env` file and add your API Keys from weatherapi.com
 ```bash
 WEATHERAPI_API_KEY=your_weatherapi_key_here
 ```
 
-4. **Edit the `.env` File:
+4. **Edit the `.env` File**:
 ```bash
 go build -o forecast
 ```
@@ -143,4 +143,4 @@ This project is under the [GNU General Public Licence v3.0](https://choosealicen
 
 | Version | Date       | Description                                      |
 |---------|------------|--------------------------------------------------|
-| 1.0.0   | March 2025 | Launch of first version of Forecast-CLI. Type `forecast` to show 6-days forecast to your current location.|
+| [1.0.0](https://github.com/barbaracalderon/forecast-cli/releases/tag/v1.0.0)   | March 2025 | Launch of first version of Forecast-CLI. Type `forecast` to show 6-days forecast to your current location.|
