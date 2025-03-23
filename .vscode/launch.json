@@ -1,0 +1,15 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug Forecast CLI",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "program": "${workspaceFolder}",
+            "args": ["forecast"],
+            "envFile": "${env:HOME}/.config/forecast-cli/.env",
+            "showLog": true
+        }
+    ]
+}
