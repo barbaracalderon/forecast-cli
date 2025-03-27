@@ -1,6 +1,6 @@
 # Forecast CLI
 
-A simple command-line tool to fetch and display weather forecasts using [WeatherAPI](https://www.weatherapi.com/) and location data from [ipinfo.io](https://ipinfo.io/).
+A simple command-line tool to fetch and display weather forecasts using [WeatherAPI](https://www.weatherapi.com/) and automatic location data from [ipinfo.io](https://ipinfo.io/).
 
 Type `forecast` into your linux terminal and get a 6-day forecast to your current location.
 
@@ -16,10 +16,18 @@ I'm Barbara Calderon, a software developer.
 
 ## Features
 
-- **Current Weather**: Displays the current weather conditions, temperature, humidity, and more.
-- **6-Day Forecast**: Provides a detailed 6-day weather forecast, including sunrise and sunset times.
-- **Location-Based**: Automatically detects your location using your IP address.
-- **Easy Configuration**: Stores API keys and settings in a `.env` file for secure and flexible usage.
+### Features
+
+- **Current Weather**: Displays real-time conditions including temperature, feels-like temperature, humidity, chance of rain, and weather description
+- **6-Day Forecast**: Shows detailed daily forecasts with:
+  - Average, minimum, and maximum temperatures
+  - Precipitation chance
+  - Weather conditions
+  - Sunrise and sunset times
+- **Automatic Location**: Detects your location using your IP address (via ipinfo.io)
+- **Custom Locations**: Get weather for any city worldwide `forecast --location "City Name"`
+- **Flexible API Keys**: The default API key is read from the `.env` file but you can temporarily override it `forecast --apiKey "your_api_key_here"`
+- **Easy Configuration**: Stores API keys and settings in a .env file for secure and flexible usage, automatic config directory creation, clear error messages for missing configurations, `launch.json` file added for VSCode debugging tool.
 
 ## About
 
@@ -69,12 +77,12 @@ mv /path/to/forecast-cli/.env ~/.config/forecast-cli/
 
 3. **Edit the `.env` File**:
 
-- Open the `.env` file and add your API Keys from weatherapi.com
+- Open the `.env` file and add your API Keys from weatherapi.com, this way you have them stored and does not need to send it through the `--apiKeys` flag
 ```bash
 WEATHERAPI_API_KEY=your_weatherapi_key_here
 ```
 
-4. **Edit the `.env` File**:
+4. **Build**:
 ```bash
 go build -o forecast
 ```
@@ -86,14 +94,30 @@ go build -o forecast
 sudo mv forecast /usr/local/bin/
 ```
 
-### Usage
+## Usage
 
-Run the `forecast` command to display the currect weather and 6-day forecast:
+### Basic Usage:
 ```bash
 forecast
 ```
 
-Example output:
+### Check weather in specific location:
+
+```bash
+forecast --location "Rio de Janeiro"
+```
+
+### Use temporary API key:
+```bash
+forecast --apiKey "your_api_key_here"
+```
+
+### Combine options:
+```bash
+forecast --location "Florianópolis" --apiKey "your_api_key_here"
+```
+
+### Example output:
 
 ```bash
 ┌────────────────────────────────────────────────────────────┐
@@ -143,4 +167,5 @@ This project is under the [GNU General Public Licence v3.0](https://choosealicen
 
 | Version | Date       | Description                                      |
 |---------|------------|--------------------------------------------------|
-| [1.0.0](https://github.com/barbaracalderon/forecast-cli/releases/tag/v1.0.0)   | March 2025 | Launch of first version of Forecast-CLI. Type `forecast` to show 6-days forecast to your current location.|
+| [1.1.0](https://github.com/barbaracalderon/forecast-cli/releases/tag/v1.1.0)   | 26th March 2025 | Added `--location` and `--apiKey` flags.
+| [1.0.0](https://github.com/barbaracalderon/forecast-cli/releases/tag/v1.0.0)   | 23rd March 2025 | Initial realease with basic forecast functionality.|
