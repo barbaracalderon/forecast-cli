@@ -8,19 +8,19 @@ import (
 	"forecast-cli/config"
 )
 
-func DisplayWeather(weather *api.WeatherResponse, ipInfo config.IPInfoResponse) {
+func DisplayWeather(weather *api.WeatherResponse, locationInfo config.LocationInfo) {
 	today := weather.Forecast.ForecastDay[0]
 	todayDate, _ := time.Parse("2006-01-02", today.Date)
 
-	fmt.Println("┌────────────────────────────────────────────────────────────┐")
-	fmt.Printf("│ 🌍 Location: %s, %s, %s\n", ipInfo.City, ipInfo.Region, ipInfo.Country)
+	fmt.Println("┌──────────────────────────────────────────────────────────────────┐")
+	fmt.Printf("│ 🌍 Location: %s, %s, %s\n", locationInfo.City, locationInfo.Region, locationInfo.Country)
 	fmt.Printf("│ 📅 Date: %s | %s\n", todayDate.Format("02/01"), todayDate.Format("Monday"))
-	fmt.Println("├────────────────────────────────────────────────────────────┤")
+	fmt.Println("├──────────────────────────────────────────────────────────────────┤")
 	fmt.Printf("│ 🌡️ Current: %s, %.0f°C (Feels like %.0f°C)\n", strings.ToLower(weather.Current.Condition.Text), 
     today.Day.AvgTempC, weather.Current.FeelsLikeC)
 	fmt.Printf("│ 🔽 Min: %.0f°C | 🔼 Max: %.0f°C\n", today.Day.MinTempC, today.Day.MaxTempC)
 	fmt.Printf("│ 💧 Humidity: %d%%\n", weather.Current.Humidity)
-	fmt.Println("└────────────────────────────────────────────────────────────┘")
+	fmt.Println("└──────────────────────────────────────────────────────────────────┘")
 	fmt.Println()
 
 	fmt.Println("📅 6-Day Forecast:")
