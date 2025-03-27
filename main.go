@@ -12,6 +12,7 @@ import (
 
 func main() {
 	locationFlag := flag.String("location", "", "Specify a custom location for the weather forecast")
+	apiKeyFlag := flag.String("apiKey", "", "Specify an API key to override the .env file")
 	flag.Parse()
 
 	if len(os.Args) > 0 && (os.Args[0] == "forecast" || (len(os.Args) > 1 && os.Args[1] == "forecast")) {
@@ -21,6 +22,11 @@ func main() {
 			os.Exit(1)
 		}
 
+		apiKey := cfg.APIKey
+		if *apiKeyFlag != "" {
+			apiKey = *apiKeyFlag
+		}
+
 		var location string
 		if *locationFlag != "" {
 			location = *locationFlag
@@ -28,7 +34,7 @@ func main() {
 			location = cfg.IPInfo.City
 		}
 
-		weather, err := api.FetchWeather(cfg.APIKey, location)
+		weather, err := api.FetchWeather(apiKey, location)
 		if err != nil {
 			fmt.Println("error fetching weather:", err)
 			os.Exit(1)
@@ -42,7 +48,7 @@ func main() {
 
 		display.DisplayWeather(weather, displayLocation)
 	} else {
-		fmt.Println("Usage: forecast [--location <city>]")
+		fmt.Println("Usage: forecast [--location <city>] [--apiKey <key>]")
 		flag.PrintDefaults()
 		os.Exit(1)
 	}
