@@ -12,13 +12,13 @@ import (
 
 type Config struct {
 	APIKey string
-	IPInfo IPInfoResponse
+	IPInfo LocationInfo
 }
 
-type IPInfoResponse struct {
-	City    string `json:"city"`
-	Region  string `json:"region"`
-	Country string `json:"country"`
+type LocationInfo struct {
+    City    string `json:"city"`
+    Region  string `json:"region"`
+    Country string `json:"country"`
 }
 
 func LoadConfig() (*Config, error) {
@@ -49,25 +49,25 @@ func LoadConfig() (*Config, error) {
 	}, nil
 }
 
-func getLocationByIP() (IPInfoResponse, error) {
+func getLocationByIP() (LocationInfo, error) {
 	resp, err := http.Get("https://ipinfo.io")
 	if err != nil {
-		return IPInfoResponse{}, fmt.Errorf("error fetching IP info: %v", err)
+		return LocationInfo{}, fmt.Errorf("error fetching IP info: %v", err)
 	}
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		return IPInfoResponse{}, fmt.Errorf("IP info request failed with status: %s", resp.Status)
+		return LocationInfo{}, fmt.Errorf("IP info request failed with status: %s", resp.Status)
 	}
 
-	var ipInfo IPInfoResponse
-	if err := json.NewDecoder(resp.Body).Decode(&ipInfo); err != nil {
-		return IPInfoResponse{}, fmt.Errorf("error decoding IP info response: %v", err)
+	var locationInfoFromIP LocationInfo
+	if err := json.NewDecoder(resp.Body).Decode(&locationInfoFromIP); err != nil {
+		return LocationInfo{}, fmt.Errorf("error decoding IP info response: %v", err)
 	}
 
-	if ipInfo.City == "" || ipInfo.Region == "" || ipInfo.Country == "" {
-		return IPInfoResponse{}, fmt.Errorf("could not determine location from IP address")
+	if locationInfoFromIP.City == "" || locationInfoFromIP.Region == "" || locationInfoFromIP.Country == "" {
+		return LocationInfo{}, fmt.Errorf("could not determine location from IP address")
 	}
 
-	return ipInfo, nil
+	return locationInfoFromIP, nil
 }
